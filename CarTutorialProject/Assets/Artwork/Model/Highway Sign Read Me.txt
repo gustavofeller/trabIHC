@@ -1,0 +1,16 @@
+An old style US highway sign, in .obj format. The main texture file has several layers, so you can have a rusty sign, or a brand new-looking sign. One
+of the layers is blank so you can add your own highway number and state. Plus there's a transparency map - I don't know how to make a Mat file, so 
+you'll need to add the texture and the transparency yourself. But since it's just a simple prop, I don't think that's too big of a deal. When you 
+attach the transparency map to the transparency node, set your transparency value at 1, transparency edge at 1, and the transparency falloff value at .5  
+and there you go.
+If you have any questions, ideas, thoughts, complaints, etc, please drop me a line at arrowhead42@ultimateredskinsfan.com, or at my renderosity page.
+
+Be sure to check out my gallery at
+
+http://www.renderosity.com/mod/gallery/browse.php?username=arrowhead42
+
+Take care - 
+
+Arrowhead42
+
+

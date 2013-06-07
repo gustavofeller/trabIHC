@@ -58,11 +58,11 @@ function Update () {
 
 	// finally, apply the values to the wheels.	The torque applied is divided by the current gear, and
 	// multiplied by the user input variable.
-	//FrontLeftWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * Input.GetAxis("Vertical");
-	FrontLeftWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * accel.getAccelZ();
+	FrontLeftWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * Input.GetAxis("Vertical");
+	//FrontLeftWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * accel.getAccelZ();
 	
-    //FrontRightWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * Input.GetAxis("Vertical");
-	FrontRightWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * accel.getAccelZ();
+    FrontRightWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * Input.GetAxis("Vertical");
+	//FrontRightWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * accel.getAccelZ();
 	
     var mph = rigidbody.velocity.magnitude * 2.237;
     mphDisplay.text = mph + " MPH";    

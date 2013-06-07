@@ -33,6 +33,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     DataOutputStream os = null;
     DataInputStream is = null;
     private EditText mIpEditText;
+    private EditText mPortEditText;
     private Button connect;
     private Button close;
     private Button quit;
@@ -82,11 +83,14 @@ public class MainActivity extends Activity implements SensorEventListener {
         getAddr();
     }
 	
+	@SuppressLint("NewApi")
 	private void getAddr(){
         //Connect Button Pressed - open connection to server
         // Get our EditText object.
         // Initialize the compose field with a listener for the return key
         mIpEditText = (EditText) findViewById(R.id.editText1);
+        mPortEditText = (EditText) findViewById(R.id.editText2);
+        
        // mIpEditText.setOnEditorActionListener(mWriteListener);
  
         // Connect Button
@@ -95,7 +99,15 @@ public class MainActivity extends Activity implements SensorEventListener {
             public void onClick(View v) {
                 // Send a message using content of the edit text widget
                 String ipAddr = mIpEditText.getText().toString();
-                setupConnection(ipAddr);
+                if(!mPortEditText.getText().toString().isEmpty())
+                {
+                	int port = Integer.parseInt(mPortEditText.getText().toString());
+                	setupConnection(ipAddr, port);
+                }
+                else
+                {
+                	setupConnection(ipAddr, 3141);
+                }
             }
         });
  
@@ -110,17 +122,24 @@ public class MainActivity extends Activity implements SensorEventListener {
      
     }
 	
-	private void setupConnection(String ipAddr){
+	private void setupConnection(String ipAddr, int port){
         //TextView view = (TextView) findViewById(R.id.msgView);
+		boolean isConnected = true;
         try {
-            pcserver = new Socket(ipAddr, 3141);
+            pcserver = new Socket(ipAddr, port);
             System.out.println(pcserver.getLocalAddress().getAddress());
             os = new DataOutputStream(pcserver.getOutputStream());
             is = new DataInputStream(pcserver.getInputStream());
         } catch (UnknownHostException e) {
         	alert("Don't know about host: hostname");
+        	isConnected = false;
         } catch (IOException e) {
         	alert("Couldn't get I/O for the connection to: hostname");
+        	isConnected = false;
+        }
+        if(isConnected)
+        {
+        	alert("The device is connect with a computer");
         }
              
         //TextView view = (TextView) findViewById(R.id.xval);

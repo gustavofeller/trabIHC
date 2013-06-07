@@ -12,7 +12,6 @@ function Start () {
  
 function Update()
 {
- 
      if(Input.GetKeyDown("escape") && !isPaused)
    {
       print("Paused");

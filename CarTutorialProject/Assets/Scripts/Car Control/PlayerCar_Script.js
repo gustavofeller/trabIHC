@@ -1,3 +1,4 @@
+import AssemblyCSharpfirstpass;
 // ----------- CAR TUTORIAL SAMPLE PROJECT, ? Andrew Gotow 2009 -----------------
 
 // Here's the basic car script described in my tutorial at www.gotow.net/andrew/blog.
@@ -29,6 +30,7 @@ private var EngineRPM : float = 0.0;
 
 var mphDisplay : GUIText;
 var hitDisplay : GUIText;
+var accel : AccelerometerControl;
 
 function Start () {
 	// I usually alter the center of mass to make the car more stable. I'ts less likely to flip this way.
@@ -56,10 +58,12 @@ function Update () {
 
 	// finally, apply the values to the wheels.	The torque applied is divided by the current gear, and
 	// multiplied by the user input variable.
-	FrontLeftWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * Input.GetAxis("Vertical");
-
-    FrontRightWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * Input.GetAxis("Vertical");
-
+	//FrontLeftWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * Input.GetAxis("Vertical");
+	FrontLeftWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * accel.getAccelZ();
+	
+    //FrontRightWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * Input.GetAxis("Vertical");
+	FrontRightWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * accel.getAccelZ();
+	
     var mph = rigidbody.velocity.magnitude * 2.237;
     mphDisplay.text = mph + " MPH";    
 	hitDisplay.text = count + " HITS";
